@@ -1,15 +1,45 @@
+import Avatars from "@/components/avatars/avatars";
+
+const projects = [
+  {
+    id: 1,
+    name: 'Daoify'
+  },
+  {
+    id: 2,
+    name: 'Daoify'
+  }
+];
+
 export default function Home() {
   return (
-    <div className="flex justify-center items-start w-full bg-background h-full">
+    <div className="bg-background h-full p-10">
 
-      <h1>Good day 0x0000! 👋</h1>
+      <h1 className="text-gray-900">Good day 0x0000! 👋</h1>
 
+      <div className="flex justify-start items-center gap-10 w-full mt-10">
+        {projects.map((project, i) => (
+          <div key={i} className="bg-white rounded-3xl p-8 mb-5 max-h-80">
+            <div className="font-bold text-xl text-gray-800 leading-none">
+              {project.name}
+            </div>
+            <div className="grid grid-cols-2 gap-x-20">
+              <div className="">
+                <div className="p-4 0 rounded-xl text-gray-800">
+                  <div className="font-bold text-2xl leading-none">5,5</div>
+                  <div className="mt-2">Tracked hours</div>
+                </div>
+              </div>
 
-      <div className="bg-white rounded-3xl p-8 mb-5">
-        <div className="grid grid-cols-2 gap-x-20">
-        </div>
+              <Avatars />
+
+              <button type="button" className="col-span-2 inline-flex items-center justify-center py-2 px-3 rounded-xl bg-yellow-100 text-gray-800 hover:text-green-500 text-sm font-semibold transition">
+                Start tracking
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
-
     </div>
     // <div className="ml-60 max-h-screen overflow-auto pt-16">
     //   <div className="px-6 py-8">
