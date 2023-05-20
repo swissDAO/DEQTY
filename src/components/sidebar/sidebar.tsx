@@ -10,62 +10,61 @@ export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className='flex min-h-screen'>
+    <div className='min-h-screen'>
       <Transition.Root show={isOpen} as={Fragment}>
-        {/* modal is not closable (on purpose)*/}
         <Dialog as="div" className="relative z-10" open={true} onClose={() => setIsOpen(true)}>
-            <Transition.Child
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 z-10 overflow-y-auto">
+            <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+              <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
+                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                enterTo="opacity-100 translate-y-0 sm:scale-100"
                 leave="ease-in duration-200"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-            >
-                <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-            </Transition.Child>
-
-            <div className="fixed inset-0 z-10 overflow-y-auto">
-                <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                    <Transition.Child
-                        as={Fragment}
-                        enter="ease-out duration-300"
-                        enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                        enterTo="opacity-100 translate-y-0 sm:scale-100"
-                        leave="ease-in duration-200"
-                        leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-                        leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                    >
-                        <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
-                            <div>
-                                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
-                                </div>
-                                <div className="mt-3 text-center sm:mt-5">
-                                    <Dialog.Title as="h3" className="text-2xl font-medium leading-6 text-gray-900">
-                                    Verification Email Sent
-                                    </Dialog.Title>
-                                    <div className="mt-3">
-                                        <p className="text-md text-gray-500">
-                                            Check your Inbox for the access link
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="mt-5 sm:mt-6">
-                                <Link href={"/"} onClick={()=>{setIsOpen(false)}}>
-                                    <button
-                                        type="button"
-                                        className="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:text-sm"
-                                    >
-                                        Try again
-                                    </button>
-                                </Link>
-                            </div>
-                        </Dialog.Panel>
-                    </Transition.Child>
-                </div>
+                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              >
+                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
+                  <div>
+                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
+                    </div>
+                    <div className="mt-3 text-center sm:mt-5">
+                      <Dialog.Title as="h3" className="text-2xl font-medium leading-6 text-gray-900">
+                        Verification Email Sent
+                      </Dialog.Title>
+                      <div className="mt-3">
+                        <p className="text-md text-gray-500">
+                          Check your Inbox for the access link
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-5 sm:mt-6">
+                    <Link href={"/"} onClick={() => { setIsOpen(false) }}>
+                      <button
+                        type="button"
+                        className="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:text-sm"
+                      >
+                        Try again
+                      </button>
+                    </Link>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
             </div>
+          </div>
         </Dialog>
       </Transition.Root>
 
@@ -93,7 +92,7 @@ export default function Sidebar() {
                     className="mr-4 text-lg"
                     viewBox="0 0 16 16"
                   >
-                    <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-3.5-7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z" />
+                    <path d="M9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.825a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3zm-8.322.12C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139z" />
                   </svg>
                   Projects
                 </a>
@@ -103,15 +102,15 @@ export default function Sidebar() {
                   className="flex w-full rounded-xl bg-white px-4 py-3 text-sm font-bold text-gray-900 hover:bg-yellow-50"
                   onClick={() => setIsOpen(true)}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="1em"
-                    height="1em"
-                    fill="currentColor"
-                    className="mr-4 text-lg"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.825a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3zm-8.322.12C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139z" />
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                      <path
+                        d="M4.66667 9.33333H10.6667V15.3333C10.6667 15.8242 11.5091 16 12.0002 16C12.4911 16 13.3333 15.8244 13.3333 15.3333V9.33333H19.3333C19.8242 9.33333 20 8.49108 20 8C20 7.50914 19.8244 6.66667 19.3333 6.66667H13.3333V0.666667C13.3333 0.175811 12.4911 0 12 0C11.5091 0 10.6667 0.175588 10.6667 0.666667V6.66667H4.66667C4.17581 6.66667 4 7.50872 4 7.99979C4 8.49065 4.17559 9.33333 4.66667 9.33333Z"
+                        fill="black" />
+                      <path
+                        d="M11.1667 9.33333V8.83333H10.6667H4.70267C4.68167 8.80829 4.64927 8.7575 4.61547 8.67017C4.53776 8.46936 4.5 8.20007 4.5 7.99979C4.5 7.79946 4.5378 7.53032 4.61551 7.32966C4.6493 7.24242 4.68168 7.19168 4.70267 7.16667H10.6667H11.1667V6.66667V0.702639C11.1917 0.681642 11.2425 0.649257 11.3298 0.615463C11.5305 0.537756 11.7997 0.5 12 0.5C12.2003 0.5 12.4695 0.537797 12.6703 0.615524C12.7575 0.649319 12.8083 0.681703 12.8333 0.702704V6.66667V7.16667H13.3333H19.2974C19.3184 7.19169 19.3507 7.24246 19.3845 7.32976C19.4622 7.5305 19.5 7.79972 19.5 8C19.5 8.20034 19.4622 8.46955 19.3845 8.67027C19.3507 8.75754 19.3183 8.8083 19.2973 8.83333H13.3333H12.8333V9.33333V15.2974C12.8083 15.3184 12.7576 15.3508 12.6703 15.3845C12.4696 15.4622 12.2005 15.5 12.0002 15.5C11.7999 15.5 11.5306 15.4622 11.3298 15.3845C11.2425 15.3507 11.1917 15.3183 11.1667 15.2973V9.33333Z"
+                        stroke="black" />
+                    </g>
                   </svg>
                   Create Project
                 </button>
