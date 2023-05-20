@@ -1,5 +1,6 @@
 import Avatars from "@/components/avatars/avatars";
 import Progressbar from "@/components/progress-bar/progress-bar";
+import { useRouter } from "next/router";
 
 const projects = [
   {
@@ -13,6 +14,8 @@ const projects = [
 ];
 
 export default function Home() {
+  const router = useRouter();
+
   return (
     <div className="bg-background h-full p-10">
 
@@ -36,7 +39,11 @@ export default function Home() {
 
               <Progressbar />
 
-              <button type="button" className="col-span-2 inline-flex items-center justify-center py-2 px-3 rounded-xl bg-yellow-100 text-gray-800 hover:text-green-500 text-sm font-semibold transition">
+              <button
+                type="button"
+                className="col-span-2 inline-flex items-center justify-center py-2 px-3 rounded-xl bg-yellow-100 text-gray-800 hover:text-green-500 text-sm font-semibold transition"
+                onClick={() => router.push(`/projects/${project.id}`)}
+              >
                 Start tracking
               </button>
             </div>
