@@ -10,7 +10,14 @@ export const metadata = {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '20% 80%', backgroundColor: 'white', minHeight: '100vh' }}>
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '20% 80%',
+        backgroundColor: 'white',
+        minHeight: '100vh',
+      }}
+    >
       <Sidebar />
       <main className={`w-full ${inter.className}`}>{children}</main>
     </div>

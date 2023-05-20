@@ -1,11 +1,20 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import Logo from '../logo/logo';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 export default function Sidebar() {
+  const router = useRouter();
+
   return (
-    <div className="flex flex-col justify-between border-r h-full">
+    <div className="flex h-full flex-col justify-between border-r">
       <div className="flex-grow">
-        <div className="border-b px-4 py-6 text-center">
-          <h1 className="text-grey-900 text-xl font-bold leading-none">DQTY</h1>
+        <div
+          className="flex items-center justify-start gap-5 border-b px-4 py-6 hover:cursor-pointer"
+          onClick={() => router.replace('/')}
+        >
+          <Image src="/logo.svg" alt="" height={40} width={40} />
+          <h1 className="text-xl font-bold leading-none text-gray-900">DQTY</h1>
         </div>
         <div className="p-4">
           <ul className="space-y-1">

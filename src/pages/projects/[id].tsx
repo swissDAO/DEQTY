@@ -1,7 +1,31 @@
-import { animated, config, useSpring } from "@react-spring/web";
-import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
+import {
+  ChartBarSquareIcon,
+  Cog6ToothIcon,
+  FolderIcon,
+  GlobeAltIcon,
+  ServerIcon,
+  SignalIcon,
+} from '@heroicons/react/24/outline';
+import { animated, useSpring } from '@react-spring/web';
+import { useState } from 'react';
+import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts';
 
-const map = (value: number, sMin: number, sMax: number, dMin: number, dMax: number) => {
+const map = (
+  value: number,
+  sMin: number,
+  sMax: number,
+  dMin: number,
+  dMax: number
+) => {
   return dMin + ((value - sMin) / (sMax - sMin)) * (dMax - dMin);
 };
 const pi = Math.PI;
@@ -63,7 +87,7 @@ const graphData = [
   'May',
   'June',
   'July',
-].map((i) => {
+].map(i => {
   const revenue = 500 + Math.random() * 2000;
   const expectedRevenue = Math.max(revenue + (Math.random() - 0.5) * 2000, 0);
   return {
@@ -74,10 +98,149 @@ const graphData = [
   };
 });
 
+const stats = [
+  { name: 'Number of deploys', value: '405' },
+  { name: 'Average deploy time', value: '3.65', unit: 'mins' },
+  { name: 'Number of servers', value: '3' },
+  { name: 'Success rate', value: '98.5%' },
+];
+const statuses = {
+  Completed: 'text-green-400 bg-green-400/10',
+  Error: 'text-rose-400 bg-rose-400/10',
+};
+const activityItems = [
+  {
+    user: {
+      name: 'Michael Foster',
+      imageUrl:
+        'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    },
+    commit: '2d89f0c8',
+    branch: 'main',
+    status: 'Completed',
+    duration: '25s',
+    date: '45 minutes ago',
+    dateTime: '2023-01-23T11:00',
+  },
+  // More items...
+];
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ');
+}
+
 export default function Project() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
-    <div className="h-screen overflow-x-hidden overflow-auto bg-background p-10">
-      <div className="flex flex-wrap  flex-grow content-start  bg-white border rounded h-full w-full">
+    <div className="h-screen overflow-auto overflow-x-hidden bg-background p-10">
+      <div className="flex h-full  w-full flex-grow  flex-wrap content-start rounded border bg-white">
+        <div>
+          {/* Activity list */}
+          <div className="border-t border-white/10 pt-11">
+            <h2 className="px-4 text-base font-semibold leading-7 text-white sm:px-6 lg:px-8">
+              Latest activity
+            </h2>
+            <table className="mt-6 w-full whitespace-nowrap text-left">
+              <colgroup>
+                <col className="w-full sm:w-4/12" />
+                <col className="lg:w-4/12" />
+                <col className="lg:w-2/12" />
+                <col className="lg:w-1/12" />
+                <col className="lg:w-1/12" />
+              </colgroup>
+              <thead className="border-b border-white/10 text-sm leading-6 text-white">
+                <tr>
+                  <th
+                    scope="col"
+                    className="py-2 pl-4 pr-8 font-semibold sm:pl-6 lg:pl-8"
+                  >
+                    User
+                  </th>
+                  <th
+                    scope="col"
+                    className="hidden py-2 pl-0 pr-8 font-semibold sm:table-cell"
+                  >
+                    Commit
+                  </th>
+                  <th
+                    scope="col"
+                    className="py-2 pl-0 pr-4 text-right font-semibold sm:pr-8 sm:text-left lg:pr-20"
+                  >
+                    Status
+                  </th>
+                  <th
+                    scope="col"
+                    className="hidden py-2 pl-0 pr-8 font-semibold md:table-cell lg:pr-20"
+                  >
+                    Duration
+                  </th>
+                  <th
+                    scope="col"
+                    className="hidden py-2 pl-0 pr-4 text-right font-semibold sm:table-cell sm:pr-6 lg:pr-8"
+                  >
+                    Deployed at
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/5">
+                {activityItems.map(item => (
+                  <tr key={item.commit}>
+                    <td className="py-4 pl-4 pr-8 sm:pl-6 lg:pl-8">
+                      <div className="flex items-center gap-x-4">
+                        <img
+                          src={item.user.imageUrl}
+                          alt=""
+                          className="h-8 w-8 rounded-full bg-gray-800"
+                        />
+                        <div className="truncate text-sm font-medium leading-6 text-white">
+                          {item.user.name}
+                        </div>
+                      </div>
+                    </td>
+                    <td className="hidden py-4 pl-0 pr-4 sm:table-cell sm:pr-8">
+                      <div className="flex gap-x-3">
+                        <div className="font-mono text-sm leading-6 text-gray-400">
+                          {item.commit}
+                        </div>
+                        <span className="inline-flex items-center rounded-md bg-gray-400/10 px-2 py-1 text-xs font-medium text-gray-400 ring-1 ring-inset ring-gray-400/20">
+                          {item.branch}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="py-4 pl-0 pr-4 text-sm leading-6 sm:pr-8 lg:pr-20">
+                      <div className="flex items-center justify-end gap-x-2 sm:justify-start">
+                        <time
+                          className="text-gray-400 sm:hidden"
+                          dateTime={item.dateTime}
+                        >
+                          {item.date}
+                        </time>
+                        <div
+                          className={classNames(
+                            statuses[item.status],
+                            'flex-none rounded-full p-1'
+                          )}
+                        >
+                          <div className="h-1.5 w-1.5 rounded-full bg-current" />
+                        </div>
+                        <div className="hidden text-white sm:block">
+                          {item.status}
+                        </div>
+                      </div>
+                    </td>
+                    <td className="hidden py-4 pl-0 pr-8 text-sm leading-6 text-gray-400 md:table-cell lg:pr-20">
+                      {item.duration}
+                    </td>
+                    <td className="hidden py-4 pl-0 pr-4 text-right text-sm leading-6 text-gray-400 sm:table-cell sm:pr-6 lg:pr-8">
+                      <time dateTime={item.dateTime}>{item.date}</time>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
         {employeeData.map(
           ({
             id,
@@ -98,17 +261,12 @@ export default function Project() {
               tasksCompleted={tasksCompleted}
               imgId={imgId}
             />
-          ),
+          )
         )}
 
         <div className="w-full p-2 lg:w-2/3">
-          <div className="rounded-lg bg-card sm:h-80 h-60">
+          <div className="bg-card h-60 rounded-lg sm:h-80">
             <Graph />
-          </div>
-        </div>
-        <div className="w-full p-2 lg:w-1/3">
-          <div className="rounded-lg bg-card h-80">
-            <TopCountries />
           </div>
         </div>
       </div>
@@ -131,10 +289,10 @@ function NameCard({
   });
   return (
     <div className="w-full p-2 lg:w-1/3">
-      <div className="rounded-lg bg-card flex justify-between p-3 h-32">
+      <div className="bg-card flex h-32 justify-between rounded-lg p-3">
         <div className="">
           <div className="flex items-center">
-            <Image path={`mock_faces_${imgId}`} className="w-10 h-10" />
+            <Image path={`mock_faces_${imgId}`} className="h-10 w-10" />
             <div className="ml-2">
               <div className="flex items-center">
                 <div className="mr-2 font-bold text-white">{name}</div>
@@ -144,9 +302,9 @@ function NameCard({
             </div>
           </div>
 
-          <div className="text-sm  mt-2">{`${tasksCompleted} from 5 tasks completed`}</div>
+          <div className="mt-2  text-sm">{`${tasksCompleted} from 5 tasks completed`}</div>
           <svg
-            className="w-44 mt-3"
+            className="mt-3 w-44"
             height="6"
             viewBox="0 0 200 6"
             fill="none"
@@ -155,7 +313,7 @@ function NameCard({
             <rect width="200" height="6" rx="3" fill="#2D2D2D" />
             <animated.rect
               width={barPlayhead.interpolate(
-                (i: any) => i * (tasksCompleted / 5) * 200,
+                (i: any) => i * (tasksCompleted / 5) * 200
               )}
               height="6"
               rx="3"
@@ -176,10 +334,12 @@ function NameCard({
         <div className="flex flex-col items-center">
           <Icon
             path={rise ? 'res-react-dash-bull' : 'res-react-dash-bear'}
-            className="w-8 h-8"
+            className="h-8 w-8"
           />
           <animated.div
-            className={`font-bold text-lg ${rise ? 'text-green-500' : 'text-red-500'}`}
+            className={`text-lg font-bold ${
+              rise ? 'text-green-500' : 'text-red-500'
+            }`}
           >
             {transactions.interpolate((i: any) => `$${i.toFixed(2)}`)}
           </animated.div>
@@ -191,31 +351,31 @@ function NameCard({
 }
 function Graph() {
   const CustomTooltip = () => (
-    <div className="rounded-xl overflow-hidden tooltip-head">
+    <div className="tooltip-head overflow-hidden rounded-xl">
       <div className="flex items-center justify-between p-2">
         <div className="">Revenue</div>
-        <Icon path="res-react-dash-options" className="w-2 h-2" />
+        <Icon path="res-react-dash-options" className="h-2 w-2" />
       </div>
-      <div className="tooltip-body text-center p-3">
-        <div className="text-white font-bold">$1300.50</div>
+      <div className="tooltip-body p-3 text-center">
+        <div className="font-bold text-white">$1300.50</div>
         <div className="">Revenue from 230 sales</div>
       </div>
     </div>
   );
   return (
-    <div className="flex p-4 h-full flex-col">
+    <div className="flex h-full flex-col p-4">
       <div className="">
         <div className="flex items-center">
           <div className="font-bold text-white">Your Work Summary</div>
           <div className="flex-grow" />
 
-          <Icon path="res-react-dash-graph-range" className="w-4 h-4" />
+          <Icon path="res-react-dash-graph-range" className="h-4 w-4" />
           <div className="ml-2">Last 9 Months</div>
-          <div className="ml-6 w-5 h-5 flex justify-center items-center rounded-full icon-background">
+          <div className="icon-background ml-6 flex h-5 w-5 items-center justify-center rounded-full">
             ?
           </div>
         </div>
-        <div className="font-bold ml-5">Nov - July</div>
+        <div className="ml-5 font-bold">Nov - July</div>
       </div>
 
       <div className="flex-grow">
@@ -263,39 +423,6 @@ function Graph() {
   );
 }
 
-function TopCountries() {
-  return (
-    <div className="flex p-4 flex-col h-full">
-      <div className="flex justify-between items-center">
-        <div className="text-white font-bold">Top Countries</div>
-        <Icon path="res-react-dash-plus" className="w-5 h-5" />
-      </div>
-      <div className="">favourites</div>
-      {Countrydata.map(({ name, rise, value, id }) => (
-        <div className="flex items-center mt-3" key={id}>
-          <div className="">{id}</div>
-
-          <Image path={`res-react-dash-flag-${id}`} className="ml-2 w-6 h-6" />
-          <div className="ml-2">{name}</div>
-          <div className="flex-grow" />
-          <div className="">{`$${value.toLocaleString()}`}</div>
-          <Icon
-            path={
-              rise ? 'res-react-dash-country-up' : 'res-react-dash-country-down'
-            }
-            className="w-4 h-4 mx-3"
-          />
-          <Icon path="res-react-dash-options" className="w-2 h-2" />
-        </div>
-      ))}
-      <div className="flex-grow" />
-      <div className="flex justify-center">
-        <div className="">Check All</div>
-      </div>
-    </div>
-  );
-}
-
 function Icon({ path = 'options', className = 'w-4 h-4' }) {
   return (
     <img
@@ -307,7 +434,7 @@ function Icon({ path = 'options', className = 'w-4 h-4' }) {
 }
 
 function IconButton({
-  onClick = () => { },
+  onClick = () => {},
   icon = 'options',
   className = 'w-4 h-4',
 }) {
@@ -316,7 +443,7 @@ function IconButton({
       <img
         src={`https://assets.codepen.io/3685267/${icon}.svg`}
         alt=""
-        className="w-full h-full"
+        className="h-full w-full"
       />
     </button>
   );
@@ -331,4 +458,3 @@ function Image({ path = '1', className = 'w-4 h-4' }) {
     />
   );
 }
-
