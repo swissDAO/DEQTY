@@ -1,14 +1,4 @@
-import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
-import {
-  ChartBarSquareIcon,
-  Cog6ToothIcon,
-  FolderIcon,
-  GlobeAltIcon,
-  ServerIcon,
-  SignalIcon,
-} from '@heroicons/react/24/outline';
 import { animated, useSpring } from '@react-spring/web';
-import { useState } from 'react';
 import {
   CartesianGrid,
   Line,
@@ -130,146 +120,157 @@ function classNames(...classes) {
 }
 
 export default function Project() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
   return (
     <div className="h-screen overflow-auto overflow-x-hidden bg-background p-10">
-      <div className="flex h-full  w-full flex-grow  flex-wrap content-start rounded border bg-white">
-        <div>
-          {/* Activity list */}
-          <div className="border-t border-white/10 pt-11">
-            <h2 className="px-4 text-base font-semibold leading-7 text-white sm:px-6 lg:px-8">
-              Latest activity
-            </h2>
-            <table className="mt-6 w-full whitespace-nowrap text-left">
-              <colgroup>
-                <col className="w-full sm:w-4/12" />
-                <col className="lg:w-4/12" />
-                <col className="lg:w-2/12" />
-                <col className="lg:w-1/12" />
-                <col className="lg:w-1/12" />
-              </colgroup>
-              <thead className="border-b border-white/10 text-sm leading-6 text-white">
-                <tr>
-                  <th
-                    scope="col"
-                    className="py-2 pl-4 pr-8 font-semibold sm:pl-6 lg:pl-8"
-                  >
-                    User
-                  </th>
-                  <th
-                    scope="col"
-                    className="hidden py-2 pl-0 pr-8 font-semibold sm:table-cell"
-                  >
-                    Commit
-                  </th>
-                  <th
-                    scope="col"
-                    className="py-2 pl-0 pr-4 text-right font-semibold sm:pr-8 sm:text-left lg:pr-20"
-                  >
-                    Status
-                  </th>
-                  <th
-                    scope="col"
-                    className="hidden py-2 pl-0 pr-8 font-semibold md:table-cell lg:pr-20"
-                  >
-                    Duration
-                  </th>
-                  <th
-                    scope="col"
-                    className="hidden py-2 pl-0 pr-4 text-right font-semibold sm:table-cell sm:pr-6 lg:pr-8"
-                  >
-                    Deployed at
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-white/5">
-                {activityItems.map(item => (
-                  <tr key={item.commit}>
-                    <td className="py-4 pl-4 pr-8 sm:pl-6 lg:pl-8">
-                      <div className="flex items-center gap-x-4">
-                        <img
-                          src={item.user.imageUrl}
-                          alt=""
-                          className="h-8 w-8 rounded-full bg-gray-800"
-                        />
-                        <div className="truncate text-sm font-medium leading-6 text-white">
-                          {item.user.name}
-                        </div>
-                      </div>
-                    </td>
-                    <td className="hidden py-4 pl-0 pr-4 sm:table-cell sm:pr-8">
-                      <div className="flex gap-x-3">
-                        <div className="font-mono text-sm leading-6 text-gray-400">
-                          {item.commit}
-                        </div>
-                        <span className="inline-flex items-center rounded-md bg-gray-400/10 px-2 py-1 text-xs font-medium text-gray-400 ring-1 ring-inset ring-gray-400/20">
-                          {item.branch}
-                        </span>
-                      </div>
-                    </td>
-                    <td className="py-4 pl-0 pr-4 text-sm leading-6 sm:pr-8 lg:pr-20">
-                      <div className="flex items-center justify-end gap-x-2 sm:justify-start">
-                        <time
-                          className="text-gray-400 sm:hidden"
-                          dateTime={item.dateTime}
-                        >
-                          {item.date}
-                        </time>
-                        <div
-                          className={classNames(
-                            statuses[item.status],
-                            'flex-none rounded-full p-1'
-                          )}
-                        >
-                          <div className="h-1.5 w-1.5 rounded-full bg-current" />
-                        </div>
-                        <div className="hidden text-white sm:block">
-                          {item.status}
-                        </div>
-                      </div>
-                    </td>
-                    <td className="hidden py-4 pl-0 pr-8 text-sm leading-6 text-gray-400 md:table-cell lg:pr-20">
-                      {item.duration}
-                    </td>
-                    <td className="hidden py-4 pl-0 pr-4 text-right text-sm leading-6 text-gray-400 sm:table-cell sm:pr-6 lg:pr-8">
-                      <time dateTime={item.dateTime}>{item.date}</time>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+      <div className='h-full rounded border border-transparent bg-white p-5'>
+        <h1>Project: </h1>
+        <div className="flex h-full w-full flex-grow flex-wrap content-start">
+          <div className="w-full p-2 lg:w-1/2">
+            <div className="bg-card h-60 rounded-lg sm:h-80 border">
+              {/* <Graph /> */}
+            </div>
           </div>
-        </div>
-        {employeeData.map(
-          ({
-            id,
-            name,
-            position,
-            transactions,
-            rise,
-            tasksCompleted,
-            imgId,
-          }) => (
-            <NameCard
-              key={id}
-              id={id}
-              name={name}
-              position={position}
-              transactionAmount={transactions}
-              rise={rise}
-              tasksCompleted={tasksCompleted}
-              imgId={imgId}
-            />
-          )
-        )}
 
-        <div className="w-full p-2 lg:w-2/3">
-          <div className="bg-card h-60 rounded-lg sm:h-80">
-            <Graph />
+          <div className="w-full p-2 lg:w-1/2">
+            <div className="bg-card h-60 rounded-lg sm:h-80 border">
+              {/* <Graph /> */}
+            </div>
           </div>
+
+          {employeeData.map(
+            ({
+              id,
+              name,
+              position,
+              transactions,
+              rise,
+              tasksCompleted,
+              imgId,
+            }) => (
+              <NameCard
+                key={id}
+                id={id}
+                name={name}
+                position={position}
+                transactionAmount={transactions}
+                rise={rise}
+                tasksCompleted={tasksCompleted}
+                imgId={imgId}
+              />
+            )
+          )}
+
+          <ActivityList />
         </div>
       </div>
+    </div>
+  );
+}
+
+function ActivityList() {
+  return (
+    <div className="w-full border-t border-white/10 pt-11">
+      <h2 className="px-2 text-base font-semibold leading-7 text-gray-900">
+        Latest activity
+      </h2>
+      <table className="mt-6 w-full whitespace-nowrap text-left">
+        <colgroup>
+          <col className="w-full sm:w-4/12" />
+          <col className="lg:w-4/12" />
+          <col className="lg:w-2/12" />
+          <col className="lg:w-1/12" />
+          <col className="lg:w-1/12" />
+        </colgroup>
+        <thead className="border-b border-white/10 text-sm leading-6 text-gray-900">
+          <tr>
+            <th
+              scope="col"
+              className="py-2 pl-4 pr-8 font-semibold sm:pl-6 lg:pl-8"
+            >
+              User
+            </th>
+            <th
+              scope="col"
+              className="hidden py-2 pl-0 pr-8 font-semibold sm:table-cell"
+            >
+              Commit
+            </th>
+            <th
+              scope="col"
+              className="py-2 pl-0 pr-4 text-right font-semibold sm:pr-8 sm:text-left lg:pr-20"
+            >
+              Status
+            </th>
+            <th
+              scope="col"
+              className="hidden py-2 pl-0 pr-8 font-semibold md:table-cell lg:pr-20"
+            >
+              Duration
+            </th>
+            <th
+              scope="col"
+              className="hidden py-2 pl-0 pr-4 text-right font-semibold sm:table-cell sm:pr-6 lg:pr-8"
+            >
+              Deployed at
+            </th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-white/5">
+          {activityItems.map(item => (
+            <tr key={item.commit}>
+              <td className="py-4 pl-4 pr-8 sm:pl-6 lg:pl-8">
+                <div className="flex items-center gap-x-4">
+                  <img
+                    src={item.user.imageUrl}
+                    alt=""
+                    className="h-8 w-8 rounded-full bg-gray-800"
+                  />
+                  <div className="truncate text-sm font-medium leading-6 text-gray-900">
+                    {item.user.name}
+                  </div>
+                </div>
+              </td>
+              <td className="hidden py-4 pl-0 pr-4 sm:table-cell sm:pr-8">
+                <div className="flex gap-x-3">
+                  <div className="font-mono text-sm leading-6 text-gray-400">
+                    {item.commit}
+                  </div>
+                  <span className="inline-flex items-center rounded-md bg-gray-400/10 px-2 py-1 text-xs font-medium text-gray-400 ring-1 ring-inset ring-gray-400/20">
+                    {item.branch}
+                  </span>
+                </div>
+              </td>
+              <td className="py-4 pl-0 pr-4 text-sm leading-6 sm:pr-8 lg:pr-20">
+                <div className="flex items-center justify-end gap-x-2 sm:justify-start">
+                  <time
+                    className="text-gray-400 sm:hidden"
+                    dateTime={item.dateTime}
+                  >
+                    {item.date}
+                  </time>
+                  <div
+                    className={classNames(
+                      statuses[item.status],
+                      'flex-none rounded-full p-1'
+                    )}
+                  >
+                    <div className="h-1.5 w-1.5 rounded-full bg-current" />
+                  </div>
+                  <div className="hidden text-gray-900 sm:block">
+                    {item.status}
+                  </div>
+                </div>
+              </td>
+              <td className="hidden py-4 pl-0 pr-8 text-sm leading-6 text-gray-400 md:table-cell lg:pr-20">
+                {item.duration}
+              </td>
+              <td className="hidden py-4 pl-0 pr-4 text-right text-sm leading-6 text-gray-400 sm:table-cell sm:pr-6 lg:pr-8">
+                <time dateTime={item.dateTime}>{item.date}</time>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
@@ -282,83 +283,89 @@ function NameCard({
   tasksCompleted,
   imgId,
 }: any) {
-  const { transactions, barPlayhead } = useSpring({
-    transactions: transactionAmount,
-    barPlayhead: 1,
-    from: { transactions: 0, barPlayhead: 0 },
-  });
   return (
     <div className="w-full p-2 lg:w-1/3">
-      <div className="bg-card flex h-32 justify-between rounded-lg p-3">
+      <div className="bg-card flex flex-col justify-between rounded-lg border p-3">
         <div className="">
           <div className="flex items-center">
             <Image path={`mock_faces_${imgId}`} className="h-10 w-10" />
             <div className="ml-2">
               <div className="flex items-center">
-                <div className="mr-2 font-bold text-white">{name}</div>
+                <div className="mr-2 font-bold text-gray-900">{name}</div>
                 <Icon path="res-react-dash-tick" />
               </div>
-              <div className="text-sm ">{position}</div>
+              <div className="text-sm text-gray-900">{position}</div>
+              <div className="text-sm text-gray-900">Last contribution { }</div>
             </div>
           </div>
 
-          <div className="mt-2  text-sm">{`${tasksCompleted} from 5 tasks completed`}</div>
-          <svg
-            className="mt-3 w-44"
-            height="6"
-            viewBox="0 0 200 6"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect width="200" height="6" rx="3" fill="#2D2D2D" />
-            <animated.rect
-              width={barPlayhead.interpolate(
-                (i: any) => i * (tasksCompleted / 5) * 200
-              )}
-              height="6"
-              rx="3"
-              fill="url(#paint0_linear)"
-            />
-            <rect x="38" width="2" height="6" fill="#171717" />
-            <rect x="78" width="2" height="6" fill="#171717" />
-            <rect x="118" width="2" height="6" fill="#171717" />
-            <rect x="158" width="2" height="6" fill="#171717" />
-            <defs>
-              <linearGradient id="paint0_linear" x1="0" y1="0" x2="1" y2="0">
-                <stop stopColor="#8E76EF" />
-                <stop offset="1" stopColor="#3912D2" />
-              </linearGradient>
-            </defs>
-          </svg>
+          <div className="mt-2 text-sm text-gray-900">{`${tasksCompleted} from 5 tasks completed`}</div>
+          <ContributionBar transactionAmount={transactionAmount} tasksCompleted={tasksCompleted} />
+
+          <div className="mt-2 text-sm text-gray-900">{`${tasksCompleted} from 5 tasks completed`}</div>
+          <ContributionBar transactionAmount={transactionAmount} tasksCompleted={tasksCompleted} />
+
+          <div className="mt-2 text-sm text-gray-900">{`${tasksCompleted} from 5 tasks completed`}</div>
+          <ContributionBar transactionAmount={transactionAmount} tasksCompleted={tasksCompleted} />
         </div>
-        <div className="flex flex-col items-center">
-          <Icon
-            path={rise ? 'res-react-dash-bull' : 'res-react-dash-bear'}
-            className="h-8 w-8"
-          />
-          <animated.div
-            className={`text-lg font-bold ${
-              rise ? 'text-green-500' : 'text-red-500'
-            }`}
-          >
-            {transactions.interpolate((i: any) => `$${i.toFixed(2)}`)}
-          </animated.div>
-          <div className="text-sm ">Last 6 month</div>
+
+        <div className='flex w-full justify-between'>
+          <IconButton icon="res-react-dash-sidebar-open" />
+          <IconButton icon="res-react-dash-sidebar-open" />
         </div>
       </div>
     </div>
   );
 }
+
+function ContributionBar({ transactionAmount, tasksCompleted }: { transactionAmount: number, tasksCompleted: number }) {
+  const { transactions, barPlayhead } = useSpring({
+    transactions: transactionAmount,
+    barPlayhead: 1,
+    from: { transactions: 0, barPlayhead: 0 },
+  });
+
+  return (
+    <svg
+      className="mt-3 w-44"
+      height="6"
+      viewBox="0 0 200 6"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width="200" height="6" rx="3" fill="#2D2D2D" />
+      <animated.rect
+        width={barPlayhead.interpolate(
+          (i: any) => i * (tasksCompleted / 5) * 200
+        )}
+        height="6"
+        rx="3"
+        fill="url(#paint0_linear)"
+      />
+      <rect x="38" width="2" height="6" fill="#171717" />
+      <rect x="78" width="2" height="6" fill="#171717" />
+      <rect x="118" width="2" height="6" fill="#171717" />
+      <rect x="158" width="2" height="6" fill="#171717" />
+      <defs>
+        <linearGradient id="paint0_linear" x1="0" y1="0" x2="1" y2="0">
+          <stop stopColor="#8E76EF" />
+          <stop offset="1" stopColor="#3912D2" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
 function Graph() {
   const CustomTooltip = () => (
     <div className="tooltip-head overflow-hidden rounded-xl">
       <div className="flex items-center justify-between p-2">
-        <div className="">Revenue</div>
+        <div className="text-gray-900">Revenue</div>
         <Icon path="res-react-dash-options" className="h-2 w-2" />
       </div>
       <div className="tooltip-body p-3 text-center">
-        <div className="font-bold text-white">$1300.50</div>
-        <div className="">Revenue from 230 sales</div>
+        <div className="font-bold text-gray-900">$1300.50</div>
+        <div className="text-gray-900">Revenue from 230 sales</div>
       </div>
     </div>
   );
@@ -366,7 +373,7 @@ function Graph() {
     <div className="flex h-full flex-col p-4">
       <div className="">
         <div className="flex items-center">
-          <div className="font-bold text-white">Your Work Summary</div>
+          <div className="font-bold text-gray-900">Your Work Summary</div>
           <div className="flex-grow" />
 
           <Icon path="res-react-dash-graph-range" className="h-4 w-4" />
@@ -434,7 +441,7 @@ function Icon({ path = 'options', className = 'w-4 h-4' }) {
 }
 
 function IconButton({
-  onClick = () => {},
+  onClick = () => { },
   icon = 'options',
   className = 'w-4 h-4',
 }) {

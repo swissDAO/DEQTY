@@ -1,5 +1,4 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import Logo from '../logo/logo';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
@@ -14,7 +13,7 @@ export default function Sidebar() {
           onClick={() => router.replace('/')}
         >
           <Image src="/logo.svg" alt="" height={40} width={40} />
-          <h1 className="text-xl font-bold leading-none text-gray-900">DQTY</h1>
+          <h1 className="text-xl font-bold leading-none text-gray-900">DEQTY</h1>
         </div>
         <div className="p-4">
           <ul className="space-y-1">
