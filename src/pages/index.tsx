@@ -1,4 +1,5 @@
 import Avatars from "@/components/avatars/avatars";
+import Progressbar from "@/components/progress-bar/progress-bar";
 
 const projects = [
   {
@@ -32,6 +33,8 @@ export default function Home() {
               </div>
 
               <Avatars />
+
+              <Progressbar />
 
               <button type="button" className="col-span-2 inline-flex items-center justify-center py-2 px-3 rounded-xl bg-yellow-100 text-gray-800 hover:text-green-500 text-sm font-semibold transition">
                 Start tracking
