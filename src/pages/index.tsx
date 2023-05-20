@@ -1,6 +1,14 @@
 export default function Home() {
   return (
-    <div className="height-10 bg-yellow-500 border rounded">
+    <div className="flex justify-center items-start w-full bg-background h-full">
+
+      <h1>Good day 0x0000! 👋</h1>
+
+
+      <div className="bg-white rounded-3xl p-8 mb-5">
+        <div className="grid grid-cols-2 gap-x-20">
+        </div>
+      </div>
 
     </div>
     // <div className="ml-60 max-h-screen overflow-auto pt-16">

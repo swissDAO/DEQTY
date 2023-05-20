@@ -11,8 +11,10 @@ export const metadata = {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex flex-wrap bg-white" style={{ minHeight: '100vh' }}>
-      <Sidebar />
-      <main className={`flex justify-center items-start w-4/5 bg-yellow-50 ${inter.className}`}>{children}</main>
+      <div className="w-1/5">
+        <Sidebar />
+      </div>
+      <main className={`w-4/5 w-full ${inter.className}`}>{children}</main>
     </div>
   );
 }

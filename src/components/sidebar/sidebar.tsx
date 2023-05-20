@@ -2,7 +2,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 export default function Sidebar() {
   return (
-    <div className="flex w-1/5 flex-col justify-between border-r">
+    <div className="flex flex-col justify-between border-r h-full">
       <div className="flex-grow">
         <div className="border-b px-4 py-6 text-center">
           <h1 className="text-grey-900 text-xl font-bold leading-none">DQTY</h1>
