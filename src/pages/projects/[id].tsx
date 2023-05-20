@@ -8,6 +8,8 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
+import Chart from 'chart.js/auto';
+import { useEffect, useRef } from 'react';
 
 const map = (
   value: number,
@@ -120,6 +122,70 @@ function classNames(...classes) {
 }
 
 export default function Project() {
+  const pieChartRef = useRef<HTMLCanvasElement | null>(null);
+  const barChartRef = useRef<HTMLCanvasElement | null>(null);
+
+  useEffect(() => {
+    const ctxPie = pieChartRef.current?.getContext("2d");
+    const ctxBar = barChartRef.current?.getContext("2d");
+
+    if (ctxPie) {
+      new Chart(ctxPie, {
+        type: 'pie',
+        data: {
+          labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday '],
+          datasets: [
+            {
+              label: 'Traffic',
+              data: [2112, 2343, 2545, 3423, 2365, 1985, 987],
+              backgroundColor: [
+                'rgba(63, 81, 181, 0.5)',
+                'rgba(77, 182, 172, 0.5)',
+                'rgba(66, 133, 244, 0.5)',
+                'rgba(156, 39, 176, 0.5)',
+                'rgba(233, 30, 99, 0.5)',
+                'rgba(66, 73, 244, 0.4)',
+                'rgba(66, 133, 244, 0.2)',
+              ],
+            },
+          ],
+        },
+      });
+    }
+
+    if (ctxBar) {
+      new Chart(ctxBar, {
+        type: 'bar',
+        data: {
+          labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday '],
+          datasets: [{
+            label: 'My First Dataset',
+            data: [65, 59, 80, 81, 56, 55, 40],
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 159, 64, 0.2)',
+              'rgba(255, 205, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(201, 203, 207, 0.2)'
+            ],
+            borderColor: [
+              'rgb(255, 99, 132)',
+              'rgb(255, 159, 64)',
+              'rgb(255, 205, 86)',
+              'rgb(75, 192, 192)',
+              'rgb(54, 162, 235)',
+              'rgb(153, 102, 255)',
+              'rgb(201, 203, 207)'
+            ],
+            borderWidth: 1
+          }]
+        },
+      });
+    }
+  }, [pieChartRef])
+
   return (
     <div className="h-screen overflow-auto overflow-x-hidden bg-background p-10">
       <div className='h-full rounded border border-transparent bg-white p-5'>
@@ -128,12 +194,14 @@ export default function Project() {
           <div className="w-full p-2 lg:w-1/2">
             <div className="bg-card h-60 rounded-lg sm:h-80 border">
               {/* <Graph /> */}
+              <canvas ref={barChartRef}></canvas>
             </div>
           </div>
 
           <div className="w-full p-2 lg:w-1/2">
             <div className="bg-card h-60 rounded-lg sm:h-80 border">
               {/* <Graph /> */}
+              <canvas ref={pieChartRef}></canvas>
             </div>
           </div>
 
