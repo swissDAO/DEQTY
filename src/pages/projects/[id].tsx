@@ -119,10 +119,6 @@ const activityItems = [
   // More items...
 ];
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
-}
-
 function ContributionDialog({ onClose }: { onClose: () => void }) {
   return (
     <Transition.Root show={true} as={Fragment}>
@@ -366,6 +362,8 @@ export default function Project() {
                 rise={rise}
                 tasksCompleted={tasksCompleted}
                 imgId={imgId}
+                onContribution={() => setOpenContributionDialog(true)}
+                onSettings={() => setOpenSettingsDialog(true)}
               />
             )
           )}
@@ -465,6 +463,8 @@ function NameCard({
   rise,
   tasksCompleted,
   imgId,
+  onContribution,
+  onSettings,
 }: any) {
   return (
     <div className="w-full p-2 lg:w-1/3">
@@ -493,8 +493,19 @@ function NameCard({
         </div>
 
         <div className='flex w-full justify-between'>
-          <IconButton icon="res-react-dash-sidebar-open" />
-          <IconButton icon="res-react-dash-sidebar-open" />
+          <button type="button" onClick={onContribution}>
+            <img
+              src="/create.svg"
+              alt=""
+            />
+          </button>
+
+          <button type="button" onClick={onSettings}>
+            <img
+              src="/edit.svg"
+              alt=""
+            />
+          </button>
         </div>
       </div>
     </div>
