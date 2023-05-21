@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react';
 import Link from 'next/link';
+import { ConnectButtonStyled } from '../ConnectButton';
 
 export default function Sidebar() {
   const router = useRouter();
@@ -119,7 +120,7 @@ export default function Sidebar() {
           </div>
         </div>
         <div className="p-4">
-          <ConnectButton />
+          <ConnectButtonStyled onClose={() => { }} />
         </div>
       </div>
     </div>

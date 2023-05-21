@@ -42,7 +42,7 @@ export const ConnectButtonStyled = ({ onClose }: { onClose: () => void }) => {
               if (!connected) {
                 return (
                   <button
-                    onClick={openConnectModal}
+                    onClick={onConnect}
                     type="button"
                     style={{
                       background: 'yellow',
@@ -117,7 +117,7 @@ export const ConnectButtonStyled = ({ onClose }: { onClose: () => void }) => {
                     {chain.name}
                   </button>
                   <button
-                    onClick={onConnect}
+                    onClick={openAccountModal}
                     type="button"
                     style={{
                       background: 'yellow',
