@@ -24,8 +24,7 @@ export const ConnectButtonStyled = ({ onClose }: { onClose: () => void }) => {
           ready &&
           account &&
           chain &&
-          (!authenticationStatus ||
-            authenticationStatus === 'authenticated');
+          (!authenticationStatus || authenticationStatus === 'authenticated');
 
         return (
           <div
@@ -44,7 +43,7 @@ export const ConnectButtonStyled = ({ onClose }: { onClose: () => void }) => {
                   <button
                     onClick={onConnect}
                     type="button"
-                    className='bg-yellow-200'
+                    className="bg-yellow-200"
                     style={{
                       color: 'black',
                       padding: '8px 16px',
@@ -63,7 +62,7 @@ export const ConnectButtonStyled = ({ onClose }: { onClose: () => void }) => {
                   <button
                     onClick={openChainModal}
                     type="button"
-                    className='bg-yellow-200'
+                    className="bg-yellow-200"
                     style={{
                       color: 'black',
                       padding: '8px 16px',
@@ -81,7 +80,7 @@ export const ConnectButtonStyled = ({ onClose }: { onClose: () => void }) => {
                 <div style={{ display: 'flex', gap: 12 }}>
                   <button
                     onClick={openChainModal}
-                    className='bg-yellow-200'
+                    className="bg-yellow-200"
                     style={{
                       display: 'flex',
                       alignItems: 'center',
@@ -119,7 +118,7 @@ export const ConnectButtonStyled = ({ onClose }: { onClose: () => void }) => {
                   <button
                     onClick={openAccountModal}
                     type="button"
-                    className='bg-yellow-200'
+                    className="bg-yellow-200"
                     style={{
                       color: 'black',
                       padding: '8px 16px',
@@ -130,7 +129,9 @@ export const ConnectButtonStyled = ({ onClose }: { onClose: () => void }) => {
                     }}
                   >
                     {account.displayName}
-                    {account.displayBalance ? ` (${account.displayBalance})` : ''}
+                    {account.displayBalance
+                      ? ` (${account.displayBalance})`
+                      : ''}
                   </button>
                 </div>
               );

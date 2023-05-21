@@ -1,18 +1,9 @@
-import { animated, useSpring } from '@react-spring/web';
-import {
-  CartesianGrid,
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts';
-import Chart from 'chart.js/auto';
-import { Fragment, useEffect, useRef, useState } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
-import Link from 'next/link';
 import AddContribution from '@/components/forms/add-contribution';
+import { Dialog, Transition } from '@headlessui/react';
+import { animated, useSpring } from '@react-spring/web';
+import Chart from 'chart.js/auto';
+import Link from 'next/link';
+import { Fragment, useEffect, useRef, useState } from 'react';
 
 const map = (
   value: number,
@@ -153,12 +144,14 @@ function ContributionDialog({ onClose }: { onClose: () => void }) {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
+              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
                 <div>
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
-                  </div>
+                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100"></div>
                   <div className="mt-3 text-center sm:mt-5">
-                    <Dialog.Title as="h3" className="text-2xl font-medium leading-6 text-gray-900">
+                    <Dialog.Title
+                      as="h3"
+                      className="text-2xl font-medium leading-6 text-gray-900"
+                    >
                       Verification Email Sent
                     </Dialog.Title>
                     <div className="mt-3">
@@ -169,7 +162,7 @@ function ContributionDialog({ onClose }: { onClose: () => void }) {
                   </div>
                 </div>
                 <div className="mt-5 sm:mt-6">
-                  <Link href={"/"} onClick={onClose}>
+                  <Link href={'/'} onClick={onClose}>
                     <button
                       type="button"
                       className="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:text-sm"
@@ -183,8 +176,8 @@ function ContributionDialog({ onClose }: { onClose: () => void }) {
           </div>
         </div>
       </Dialog>
-    </Transition.Root >
-  )
+    </Transition.Root>
+  );
 }
 
 function SettingsDialog({ onClose }: { onClose: () => void }) {
@@ -214,12 +207,14 @@ function SettingsDialog({ onClose }: { onClose: () => void }) {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
+              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
                 <div>
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
-                  </div>
+                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100"></div>
                   <div className="mt-3 text-center sm:mt-5">
-                    <Dialog.Title as="h3" className="text-2xl font-medium leading-6 text-gray-900">
+                    <Dialog.Title
+                      as="h3"
+                      className="text-2xl font-medium leading-6 text-gray-900"
+                    >
                       Verification Email Sent
                     </Dialog.Title>
                     <div className="mt-3">
@@ -230,7 +225,7 @@ function SettingsDialog({ onClose }: { onClose: () => void }) {
                   </div>
                 </div>
                 <div className="mt-5 sm:mt-6">
-                  <Link href={"/"} onClick={onClose}>
+                  <Link href={'/'} onClick={onClose}>
                     <button
                       type="button"
                       className="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:text-sm"
@@ -244,8 +239,8 @@ function SettingsDialog({ onClose }: { onClose: () => void }) {
           </div>
         </div>
       </Dialog>
-    </Transition.Root >
-  )
+    </Transition.Root>
+  );
 }
 
 export default function Project() {
@@ -256,14 +251,22 @@ export default function Project() {
   const [openSettingsDialog, setOpenSettingsDialog] = useState(false);
 
   useEffect(() => {
-    const ctxPie = pieChartRef.current?.getContext("2d");
-    const ctxBar = barChartRef.current?.getContext("2d");
+    const ctxPie = pieChartRef.current?.getContext('2d');
+    const ctxBar = barChartRef.current?.getContext('2d');
 
     if (ctxPie) {
       new Chart(ctxPie, {
         type: 'pie',
         data: {
-          labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday '],
+          labels: [
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday',
+            'Saturday',
+            'Sunday ',
+          ],
           datasets: [
             {
               label: 'Traffic',
@@ -283,10 +286,10 @@ export default function Project() {
         options: {
           plugins: {
             legend: {
-              display: false
-            }
-          }
-        }
+              display: false,
+            },
+          },
+        },
       });
     }
 
@@ -294,59 +297,75 @@ export default function Project() {
       new Chart(ctxBar, {
         type: 'bar',
         data: {
-          labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday '],
-          datasets: [{
-            label: 'My First Dataset',
-            data: [65, 59, 80, 81, 56, 55, 40],
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(255, 159, 64, 0.2)',
-              'rgba(255, 205, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(201, 203, 207, 0.2)'
-            ],
-            borderColor: [
-              'rgb(255, 99, 132)',
-              'rgb(255, 159, 64)',
-              'rgb(255, 205, 86)',
-              'rgb(75, 192, 192)',
-              'rgb(54, 162, 235)',
-              'rgb(153, 102, 255)',
-              'rgb(201, 203, 207)'
-            ],
-            borderWidth: 1
-          }]
+          labels: [
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday',
+            'Saturday',
+            'Sunday ',
+          ],
+          datasets: [
+            {
+              label: 'My First Dataset',
+              data: [65, 59, 80, 81, 56, 55, 40],
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 205, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(201, 203, 207, 0.2)',
+              ],
+              borderColor: [
+                'rgb(255, 99, 132)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(54, 162, 235)',
+                'rgb(153, 102, 255)',
+                'rgb(201, 203, 207)',
+              ],
+              borderWidth: 1,
+            },
+          ],
         },
         options: {
           plugins: {
             legend: {
-              display: false
-            }
-          }
-        }
+              display: false,
+            },
+          },
+        },
       });
     }
-  }, [pieChartRef])
+  }, [pieChartRef]);
 
   return (
     <div className="h-screen overflow-auto overflow-x-hidden bg-background p-10">
-        
-      {openContributionDialog && <AddContribution isOpen={openContributionDialog} onClose={() => setOpenContributionDialog(false)} />}
-      {openSettingsDialog && <SettingsDialog onClose={() => setOpenSettingsDialog(false)} />}
+      {openContributionDialog && (
+        <AddContribution
+          isOpen={openContributionDialog}
+          onClose={() => setOpenContributionDialog(false)}
+        />
+      )}
+      {openSettingsDialog && (
+        <SettingsDialog onClose={() => setOpenSettingsDialog(false)} />
+      )}
 
-      <div className='h-full rounded border border-transparent bg-white p-5'>
-        <h1 className='text-gray-900'>Project: </h1>
+      <div className="h-full rounded border border-transparent bg-white p-5">
+        <h1 className="text-gray-900">Project: </h1>
         <div className="flex h-full w-full flex-grow flex-wrap content-start">
           <div className="w-full p-2 lg:w-1/2">
-            <div className="flex justify-center items-center bg-card h-60 rounded-lg sm:h-80 border">
+            <div className="bg-card flex h-60 items-center justify-center rounded-lg border sm:h-80">
               <canvas ref={barChartRef}></canvas>
             </div>
           </div>
 
           <div className="w-full p-2 lg:w-1/2">
-            <div className="flex justify-center items-center bg-card h-60 rounded-lg sm:h-80 border">
+            <div className="bg-card flex h-60 items-center justify-center rounded-lg border sm:h-80">
               <canvas ref={pieChartRef}></canvas>
             </div>
           </div>
@@ -400,28 +419,16 @@ function ActivityList() {
         </colgroup>
         <thead className="border-b border-white/10 text-sm leading-6 text-gray-900">
           <tr>
-            <th
-              scope="col"
-              className="py-2 pr-8 font-semibold sm:pl-6 lg:pl-8"
-            >
+            <th scope="col" className="py-2 pr-8 font-semibold sm:pl-6 lg:pl-8">
               User
             </th>
-            <th
-              scope="col"
-              className="py-2 pr-8 font-semibold"
-            >
+            <th scope="col" className="py-2 pr-8 font-semibold">
               Project
             </th>
-            <th
-              scope="col"
-              className="py-2 pr-8 font-semibold"
-            >
+            <th scope="col" className="py-2 pr-8 font-semibold">
               Contribution
             </th>
-            <th
-              scope="col"
-              className="py-2 pr-8 font-semibold "
-            >
+            <th scope="col" className="py-2 pr-8 font-semibold ">
               Timestamp
             </th>
           </tr>
@@ -443,14 +450,14 @@ function ActivityList() {
               </td>
               <td className="hidden py-4 pl-0 pr-4 sm:table-cell sm:pr-8">
                 <div className="flex gap-x-3">
-                  <span className='py-4 pl-0 pr-4 text-right text-sm leading-6 text-gray-400'>
+                  <span className="py-4 pl-0 pr-4 text-right text-sm leading-6 text-gray-400">
                     {item.branch}
                   </span>
                 </div>
               </td>
               <td className="hidden py-4 pl-0 pr-4 sm:table-cell sm:pr-8">
                 <div className="flex gap-x-3">
-                  <span className='hidden py-4 pl-0 pr-4 text-right text-sm leading-6 text-gray-400 sm:table-cell sm:pr-6 lg:pr-8'>
+                  <span className="hidden py-4 pl-0 pr-4 text-right text-sm leading-6 text-gray-400 sm:table-cell sm:pr-6 lg:pr-8">
                     Work
                   </span>
                 </div>
@@ -477,56 +484,66 @@ function NameCard({
   onContribution,
   onSettings,
 }: any) {
+  const percentageSlices = Math.round((slices / totalSlices) * 100);
+  const percentageSpent = Math.round((etherSpent / totalEtherSpent) * 100);
 
-    const percentageSlices = Math.round((slices / totalSlices) * 100);
-    const percentageSpent = Math.round((etherSpent / totalEtherSpent) * 100);
-
-    return (
-        <div className="w-full p-2 lg:w-1/3">
-        <div className="bg-card flex flex-col justify-between rounded-lg border p-3">
-            <div className="">
-            <div className="flex items-center mb-8">
-                <Image path={`mock_faces_${imgId}`} className="h-10 w-10" />
-                <div className="ml-2">
-                <div className="flex items-center">
-                    <div className="mr-2 font-bold text-gray-900">{name}</div>
-                    <Icon path="res-react-dash-tick" />
-                </div>
-                <div className="text-sm text-gray-900">{position}</div>
-                <div className="text-sm text-gray-900">Last contribution { }</div>
-                </div>
+  return (
+    <div className="w-full p-2 lg:w-1/3">
+      <div className="bg-card flex flex-col justify-between rounded-lg border p-3">
+        <div className="">
+          <div className="mb-8 flex items-center">
+            <Image path={`mock_faces_${imgId}`} className="h-10 w-10" />
+            <div className="ml-2">
+              <div className="flex items-center">
+                <div className="mr-2 font-bold text-gray-900">{name}</div>
+                <Icon path="res-react-dash-tick" />
+              </div>
+              <div className="text-sm text-gray-900">{position}</div>
+              <div className="text-sm text-gray-900">Last contribution {}</div>
             </div>
+          </div>
 
-            <div className="mt-2 text-sm text-gray-900">{`Slices: ${slices} (${percentageSlices}%)`}</div>
-            <ContributionBar transactionAmount={transactionAmount} slices={slices} total={totalSlices}/>
+          <div className="mt-2 text-sm text-gray-900">{`Slices: ${slices} (${percentageSlices}%)`}</div>
+          <ContributionBar
+            transactionAmount={transactionAmount}
+            slices={slices}
+            total={totalSlices}
+          />
 
-            <div className="mt-2 text-sm text-gray-900">{`ETH spent: ${etherSpent} (${percentageSpent}%)`}</div>
-            <ContributionBar transactionAmount={transactionAmount} slices={etherSpent} total={totalEtherSpent}/>
+          <div className="mt-2 text-sm text-gray-900">{`ETH spent: ${etherSpent} (${percentageSpent}%)`}</div>
+          <ContributionBar
+            transactionAmount={transactionAmount}
+            slices={etherSpent}
+            total={totalEtherSpent}
+          />
+        </div>
 
-            
-            </div>
+        <div className="mt-16 flex w-full justify-between">
+          <button type="button" onClick={onContribution}>
+            <img src="/create.svg" alt="" />
+          </button>
 
-            <div className='mt-16 flex w-full justify-between'>
-            <button type="button" onClick={onContribution}>
-                <img
-                src="/create.svg"
-                alt=""
-                />
-            </button>
-
-            {/* <button type="button" onClick={onSettings}>
+          {/* <button type="button" onClick={onSettings}>
                 <img
                 src="/edit.svg"
                 alt=""
                 />
             </button> */}
-            </div>
         </div>
-        </div>
-    );
+      </div>
+    </div>
+  );
 }
 
-function ContributionBar({ transactionAmount, slices, total }: { transactionAmount: number, slices: number, total: number }) {
+function ContributionBar({
+  transactionAmount,
+  slices,
+  total,
+}: {
+  transactionAmount: number;
+  slices: number;
+  total: number;
+}) {
   const { transactions, barPlayhead } = useSpring({
     transactions: transactionAmount,
     barPlayhead: 1,
@@ -543,9 +560,7 @@ function ContributionBar({ transactionAmount, slices, total }: { transactionAmou
     >
       <rect width="200" height="6" rx="3" fill="#2D2D2D" />
       <animated.rect
-        width={barPlayhead.interpolate(
-          (i: any) => i * (slices / total) * 200
-        )}
+        width={barPlayhead.interpolate((i: any) => i * (slices / total) * 200)}
         height="6"
         rx="3"
         fill="url(#paint0_linear)"
@@ -575,7 +590,7 @@ function Icon({ path = 'options', className = 'w-4 h-4' }) {
 }
 
 function IconButton({
-  onClick = () => { },
+  onClick = () => {},
   icon = 'options',
   className = 'w-4 h-4',
 }) {
