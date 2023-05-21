@@ -12,6 +12,7 @@ import Chart from 'chart.js/auto';
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import Link from 'next/link';
+import AddContribution from '@/components/forms/add-contribution';
 
 const map = (
   value: number,
@@ -331,7 +332,8 @@ export default function Project() {
 
   return (
     <div className="h-screen overflow-auto overflow-x-hidden bg-background p-10">
-      {openContributionDialog && <ContributionDialog onClose={() => setOpenContributionDialog(false)} />}
+        
+      {openContributionDialog && <AddContribution isOpen={openContributionDialog} onClose={() => setOpenContributionDialog(false)} />}
       {openSettingsDialog && <SettingsDialog onClose={() => setOpenSettingsDialog(false)} />}
 
       <div className='h-full rounded border border-transparent bg-white p-5'>
