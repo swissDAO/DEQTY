@@ -13,11 +13,13 @@ export default function App({ Component, pageProps }: AppProps) {
     [polygonMumbai],
     [alchemyProvider({ apiKey: 'cJGP1FbXJTlPtxsrbjT1_0hT5s-9AD4f' }), publicProvider()]
   );
+
   const { connectors } = getDefaultWallets({
     appName: 'My RainbowKit App',
     projectId: 'YOUR_PROJECT_ID',
     chains,
   });
+
   const wagmiConfig = createConfig({
     autoConnect: true,
     connectors,

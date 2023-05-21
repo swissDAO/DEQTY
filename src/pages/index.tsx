@@ -7,6 +7,9 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useAccount } from 'wagmi';
+import { createWalletClient, http } from 'viem';
+import { polygonMumbai } from 'viem/chains';
+import abi from '../resources/DEQTYFactory.json';
 
 const projects = [
   {
@@ -25,6 +28,20 @@ export default function Home() {
 
   const [isOpen, setIsOpen] = useState(false);
   const [account, setAccount] = useState('');
+
+  const walletClient = createWalletClient({
+    chain: polygonMumbai,
+    transport: http('https://polygon-mumbai.g.alchemy.com/v2/cJGP1FbXJTlPtxsrbjT1_0hT5s-9AD4f')
+  })
+
+  const createContract = async () => {
+    const hash = await walletClient.deployContract({
+      abi,
+      account,
+      args: [69420],
+      bytecode: '0x608060405260405161083e38038061083e833981016040819052610...',
+    })
+  }
 
   useEffect(() => {
     setIsOpen(!isConnected);
