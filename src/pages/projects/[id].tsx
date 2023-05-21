@@ -375,41 +375,34 @@ function ActivityList() {
         <colgroup>
           <col className="w-full sm:w-4/12" />
           <col className="lg:w-4/12" />
-          <col className="lg:w-2/12" />
-          <col className="lg:w-1/12" />
-          <col className="lg:w-1/12" />
+          <col className="lg:w-4/12" />
+          <col className="lg:w-4/12" />
         </colgroup>
         <thead className="border-b border-white/10 text-sm leading-6 text-gray-900">
           <tr>
             <th
               scope="col"
-              className="py-2 pl-4 pr-8 font-semibold sm:pl-6 lg:pl-8"
+              className="py-2 pr-8 font-semibold sm:pl-6 lg:pl-8"
             >
               User
             </th>
             <th
               scope="col"
-              className="hidden py-2 pl-0 pr-8 font-semibold sm:table-cell"
+              className="py-2 pr-8 font-semibold"
             >
-              Commit
+              Project
             </th>
             <th
               scope="col"
-              className="py-2 pl-0 pr-4 text-right font-semibold sm:pr-8 sm:text-left lg:pr-20"
+              className="py-2 pr-8 font-semibold"
             >
-              Status
+              Contribution
             </th>
             <th
               scope="col"
-              className="hidden py-2 pl-0 pr-8 font-semibold md:table-cell lg:pr-20"
+              className="py-2 pr-8 font-semibold "
             >
-              Duration
-            </th>
-            <th
-              scope="col"
-              className="hidden py-2 pl-0 pr-4 text-right font-semibold sm:table-cell sm:pr-6 lg:pr-8"
-            >
-              Deployed at
+              Timestamp
             </th>
           </tr>
         </thead>
@@ -430,37 +423,17 @@ function ActivityList() {
               </td>
               <td className="hidden py-4 pl-0 pr-4 sm:table-cell sm:pr-8">
                 <div className="flex gap-x-3">
-                  <div className="font-mono text-sm leading-6 text-gray-400">
-                    {item.commit}
-                  </div>
-                  <span className="inline-flex items-center rounded-md bg-gray-400/10 px-2 py-1 text-xs font-medium text-gray-400 ring-1 ring-inset ring-gray-400/20">
+                  <span className='py-4 pl-0 pr-4 text-right text-sm leading-6 text-gray-400'>
                     {item.branch}
                   </span>
                 </div>
               </td>
-              <td className="py-4 pl-0 pr-4 text-sm leading-6 sm:pr-8 lg:pr-20">
-                <div className="flex items-center justify-end gap-x-2 sm:justify-start">
-                  <time
-                    className="text-gray-400 sm:hidden"
-                    dateTime={item.dateTime}
-                  >
-                    {item.date}
-                  </time>
-                  <div
-                    className={classNames(
-                      statuses[item.status],
-                      'flex-none rounded-full p-1'
-                    )}
-                  >
-                    <div className="h-1.5 w-1.5 rounded-full bg-current" />
-                  </div>
-                  <div className="hidden text-gray-900 sm:block">
-                    {item.status}
-                  </div>
+              <td className="hidden py-4 pl-0 pr-4 sm:table-cell sm:pr-8">
+                <div className="flex gap-x-3">
+                  <span className='hidden py-4 pl-0 pr-4 text-right text-sm leading-6 text-gray-400 sm:table-cell sm:pr-6 lg:pr-8'>
+                    Work
+                  </span>
                 </div>
-              </td>
-              <td className="hidden py-4 pl-0 pr-8 text-sm leading-6 text-gray-400 md:table-cell lg:pr-20">
-                {item.duration}
               </td>
               <td className="hidden py-4 pl-0 pr-4 text-right text-sm leading-6 text-gray-400 sm:table-cell sm:pr-6 lg:pr-8">
                 <time dateTime={item.dateTime}>{item.date}</time>
@@ -551,80 +524,6 @@ function ContributionBar({ transactionAmount, tasksCompleted }: { transactionAmo
         </linearGradient>
       </defs>
     </svg>
-  );
-}
-
-function Graph() {
-  const CustomTooltip = () => (
-    <div className="tooltip-head overflow-hidden rounded-xl">
-      <div className="flex items-center justify-between p-2">
-        <div className="text-gray-900">Revenue</div>
-        <Icon path="res-react-dash-options" className="h-2 w-2" />
-      </div>
-      <div className="tooltip-body p-3 text-center">
-        <div className="font-bold text-gray-900">$1300.50</div>
-        <div className="text-gray-900">Revenue from 230 sales</div>
-      </div>
-    </div>
-  );
-  return (
-    <div className="flex h-full flex-col p-4">
-      <div className="">
-        <div className="flex items-center">
-          <div className="font-bold text-gray-900">Your Work Summary</div>
-          <div className="flex-grow" />
-
-          <Icon path="res-react-dash-graph-range" className="h-4 w-4" />
-          <div className="ml-2">Last 9 Months</div>
-          <div className="icon-background ml-6 flex h-5 w-5 items-center justify-center rounded-full">
-            ?
-          </div>
-        </div>
-        <div className="ml-5 font-bold">Nov - July</div>
-      </div>
-
-      <div className="flex-grow">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart width={500} height={300} data={graphData}>
-            <defs>
-              <linearGradient id="paint0_linear" x1="0" y1="0" x2="1" y2="0">
-                <stop stopColor="#6B8DE3" />
-                <stop offset="1" stopColor="#7D1C8D" />
-              </linearGradient>
-            </defs>
-            <CartesianGrid
-              horizontal={false}
-              strokeWidth="6"
-              stroke="#252525"
-            />
-            <XAxis
-              dataKey="name"
-              axisLine={false}
-              tickLine={false}
-              tickMargin={10}
-            />
-            <YAxis axisLine={false} tickLine={false} tickMargin={10} />
-            <Tooltip content={<CustomTooltip />} cursor={false} />
-            <Line
-              activeDot={false}
-              type="monotone"
-              dataKey="expectedRevenue"
-              stroke="#242424"
-              strokeWidth="3"
-              dot={false}
-              strokeDasharray="8 8"
-            />
-            <Line
-              type="monotone"
-              dataKey="revenue"
-              stroke="url(#paint0_linear)"
-              strokeWidth="4"
-              dot={false}
-            />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-    </div>
   );
 }
 
