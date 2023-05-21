@@ -4,14 +4,14 @@ import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import '@rainbow-me/rainbowkit/styles.css';
 import { AppProps } from 'next/app';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
-import { arbitrum, mainnet, optimism, polygon } from 'wagmi/chains';
+import { polygonMumbai } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 
 export default function App({ Component, pageProps }: AppProps) {
   const { chains, publicClient } = configureChains(
-    [mainnet, polygon, optimism, arbitrum],
-    [alchemyProvider({ apiKey: process.env.ALCHEMY_ID! }), publicProvider()]
+    [polygonMumbai],
+    [alchemyProvider({ apiKey: 'cJGP1FbXJTlPtxsrbjT1_0hT5s-9AD4f' }), publicProvider()]
   );
   const { connectors } = getDefaultWallets({
     appName: 'My RainbowKit App',
