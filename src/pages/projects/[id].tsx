@@ -277,6 +277,13 @@ export default function Project() {
             },
           ],
         },
+        options: {
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        }
       });
     }
 
@@ -309,6 +316,13 @@ export default function Project() {
             borderWidth: 1
           }]
         },
+        options: {
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        }
       });
     }
   }, [pieChartRef])
@@ -319,18 +333,16 @@ export default function Project() {
       {openSettingsDialog && <SettingsDialog onClose={() => setOpenSettingsDialog(false)} />}
 
       <div className='h-full rounded border border-transparent bg-white p-5'>
-        <h1>Project: </h1>
+        <h1 className='text-gray-900'>Project: </h1>
         <div className="flex h-full w-full flex-grow flex-wrap content-start">
           <div className="w-full p-2 lg:w-1/2">
-            <div className="bg-card h-60 rounded-lg sm:h-80 border">
-              {/* <Graph /> */}
+            <div className="flex justify-center items-center bg-card h-60 rounded-lg sm:h-80 border">
               <canvas ref={barChartRef}></canvas>
             </div>
           </div>
 
           <div className="w-full p-2 lg:w-1/2">
-            <div className="bg-card h-60 rounded-lg sm:h-80 border">
-              {/* <Graph /> */}
+            <div className="flex justify-center items-center bg-card h-60 rounded-lg sm:h-80 border">
               <canvas ref={pieChartRef}></canvas>
             </div>
           </div>
