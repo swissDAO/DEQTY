@@ -25,6 +25,9 @@ const map = (
 const pi = Math.PI;
 const tau = 2 * pi;
 
+const totalSlices = 6500;
+const totalEtherSpent = 1.74;
+
 const employeeData = [
   {
     id: 1,
@@ -32,7 +35,8 @@ const employeeData = [
     position: "Sale's manager USA",
     transactions: 3490,
     rise: true,
-    tasksCompleted: 3,
+    slices: 2000,
+    etherSpent: 0.01,
     imgId: 0,
   },
 
@@ -42,7 +46,8 @@ const employeeData = [
     position: "Sale's manager Europe",
     transactions: 590,
     rise: false,
-    tasksCompleted: 5,
+    slices: 3000,
+    etherSpent: 0.42,
     imgId: 2,
   },
 
@@ -52,7 +57,8 @@ const employeeData = [
     position: "Sale's manager Asia",
     transactions: 2600,
     rise: true,
-    tasksCompleted: 1,
+    slices: 1500,
+    etherSpent: 1.31,
     imgId: 3,
   },
 ];
@@ -350,7 +356,8 @@ export default function Project() {
               position,
               transactions,
               rise,
-              tasksCompleted,
+              etherSpent,
+              slices,
               imgId,
             }) => (
               <NameCard
@@ -360,7 +367,8 @@ export default function Project() {
                 position={position}
                 transactionAmount={transactions}
                 rise={rise}
-                tasksCompleted={tasksCompleted}
+                etherSpent={etherSpent}
+                slices={slices}
                 imgId={imgId}
                 onContribution={() => setOpenContributionDialog(true)}
                 onSettings={() => setOpenSettingsDialog(true)}
@@ -461,58 +469,62 @@ function NameCard({
   position,
   transactionAmount,
   rise,
-  tasksCompleted,
+  slices,
+  etherSpent,
   imgId,
   onContribution,
   onSettings,
 }: any) {
-  return (
-    <div className="w-full p-2 lg:w-1/3">
-      <div className="bg-card flex flex-col justify-between rounded-lg border p-3">
-        <div className="">
-          <div className="flex items-center">
-            <Image path={`mock_faces_${imgId}`} className="h-10 w-10" />
-            <div className="ml-2">
-              <div className="flex items-center">
-                <div className="mr-2 font-bold text-gray-900">{name}</div>
-                <Icon path="res-react-dash-tick" />
-              </div>
-              <div className="text-sm text-gray-900">{position}</div>
-              <div className="text-sm text-gray-900">Last contribution { }</div>
+
+    const percentageSlices = Math.round((slices / totalSlices) * 100);
+    const percentageSpent = Math.round((etherSpent / totalEtherSpent) * 100);
+
+    return (
+        <div className="w-full p-2 lg:w-1/3">
+        <div className="bg-card flex flex-col justify-between rounded-lg border p-3">
+            <div className="">
+            <div className="flex items-center mb-8">
+                <Image path={`mock_faces_${imgId}`} className="h-10 w-10" />
+                <div className="ml-2">
+                <div className="flex items-center">
+                    <div className="mr-2 font-bold text-gray-900">{name}</div>
+                    <Icon path="res-react-dash-tick" />
+                </div>
+                <div className="text-sm text-gray-900">{position}</div>
+                <div className="text-sm text-gray-900">Last contribution { }</div>
+                </div>
             </div>
-          </div>
 
-          <div className="mt-2 text-sm text-gray-900">{`${tasksCompleted} from 5 tasks completed`}</div>
-          <ContributionBar transactionAmount={transactionAmount} tasksCompleted={tasksCompleted} />
+            <div className="mt-2 text-sm text-gray-900">{`Slices: ${slices} (${percentageSlices}%)`}</div>
+            <ContributionBar transactionAmount={transactionAmount} slices={slices} total={totalSlices}/>
 
-          <div className="mt-2 text-sm text-gray-900">{`${tasksCompleted} from 5 tasks completed`}</div>
-          <ContributionBar transactionAmount={transactionAmount} tasksCompleted={tasksCompleted} />
+            <div className="mt-2 text-sm text-gray-900">{`ETH spent: ${etherSpent} (${percentageSpent}%)`}</div>
+            <ContributionBar transactionAmount={transactionAmount} slices={etherSpent} total={totalEtherSpent}/>
 
-          <div className="mt-2 text-sm text-gray-900">{`${tasksCompleted} from 5 tasks completed`}</div>
-          <ContributionBar transactionAmount={transactionAmount} tasksCompleted={tasksCompleted} />
+            
+            </div>
+
+            <div className='mt-16 flex w-full justify-between'>
+            <button type="button" onClick={onContribution}>
+                <img
+                src="/create.svg"
+                alt=""
+                />
+            </button>
+
+            {/* <button type="button" onClick={onSettings}>
+                <img
+                src="/edit.svg"
+                alt=""
+                />
+            </button> */}
+            </div>
         </div>
-
-        <div className='flex w-full justify-between'>
-          <button type="button" onClick={onContribution}>
-            <img
-              src="/create.svg"
-              alt=""
-            />
-          </button>
-
-          <button type="button" onClick={onSettings}>
-            <img
-              src="/edit.svg"
-              alt=""
-            />
-          </button>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
-function ContributionBar({ transactionAmount, tasksCompleted }: { transactionAmount: number, tasksCompleted: number }) {
+function ContributionBar({ transactionAmount, slices, total }: { transactionAmount: number, slices: number, total: number }) {
   const { transactions, barPlayhead } = useSpring({
     transactions: transactionAmount,
     barPlayhead: 1,
@@ -530,7 +542,7 @@ function ContributionBar({ transactionAmount, tasksCompleted }: { transactionAmo
       <rect width="200" height="6" rx="3" fill="#2D2D2D" />
       <animated.rect
         width={barPlayhead.interpolate(
-          (i: any) => i * (tasksCompleted / 5) * 200
+          (i: any) => i * (slices / total) * 200
         )}
         height="6"
         rx="3"
@@ -543,7 +555,7 @@ function ContributionBar({ transactionAmount, tasksCompleted }: { transactionAmo
       <defs>
         <linearGradient id="paint0_linear" x1="0" y1="0" x2="1" y2="0">
           <stop stopColor="#8E76EF" />
-          <stop offset="1" stopColor="#3912D2" />
+          <stop offset="1" stopColor="#8E76EF" />
         </linearGradient>
       </defs>
     </svg>
