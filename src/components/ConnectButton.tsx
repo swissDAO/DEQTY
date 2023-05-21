@@ -1,6 +1,13 @@
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { ConnectButton, useConnectModal } from '@rainbow-me/rainbowkit';
 
-export const ConnectButtonStyled = () => {
+export const ConnectButtonStyled = ({ onClose }: { onClose: () => void }) => {
+  const { openConnectModal } = useConnectModal();
+
+  const onConnect = () => {
+    openConnectModal?.();
+    onClose();
+  };
+
   return (
     <ConnectButton.Custom>
       {({
@@ -110,7 +117,7 @@ export const ConnectButtonStyled = () => {
                     {chain.name}
                   </button>
                   <button
-                    onClick={openAccountModal}
+                    onClick={onConnect}
                     type="button"
                     style={{
                       background: 'yellow',
