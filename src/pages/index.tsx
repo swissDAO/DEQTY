@@ -21,13 +21,15 @@ const projects = [
 
 export default function Home() {
   const router = useRouter();
-  const { isConnected } = useAccount()
+  const { address, isConnected } = useAccount()
 
   const [isOpen, setIsOpen] = useState(false);
+  const [account, setAccount] = useState('');
 
   useEffect(() => {
     setIsOpen(!isConnected)
-  }, [isConnected])
+    setAccount(String(address))
+  }, [address, isConnected])
 
   return (
     <div className="h-full bg-background p-10">
@@ -86,7 +88,7 @@ export default function Home() {
           </div>
         </Dialog>
       </Transition.Root>
-      <h1 className="text-gray-900">Good day 0x0000! 👋</h1>
+      <h1 className="text-gray-900">Good day {account}! 👋</h1>
 
       <div className="mt-10 flex w-full items-center justify-start gap-10">
         {projects.map((project, i) => (
